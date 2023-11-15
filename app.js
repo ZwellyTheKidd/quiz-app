@@ -74,6 +74,7 @@ function takeQuiz() {
        
         return;
     }
+    name.value.toUpperCase()
 
     showQuiz()
 

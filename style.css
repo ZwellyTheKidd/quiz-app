@@ -24,6 +24,9 @@
 .hidden {
     display: none;
 }
+.form-control{
+    border: 2px solid rgba(128, 128, 128, 0.71);
+}
 
 .error {
     position: absolute;
@@ -52,6 +55,14 @@
     font-weight: 100;
     font-size: 1.8rem;
     margin-bottom: .5rem;
+}
+.answers{
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 10px;
 }
 
 .option {
