@@ -27,9 +27,9 @@
 
 .error {
     position: absolute;
-    bottom: 1rem;
+    top: 1rem;
     right: 1rem;
-    background-color: #ff000091 !important;
+    background-color: red !important;
     color: white;
     font-weight: bold;
     padding: 1rem 3rem;

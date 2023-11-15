@@ -54,18 +54,24 @@ function showQuiz() {
     quizElement.classList.remove('hidden')
 }
 
-
+// show error
 function onError(text) {
     errorElement.classList.remove('hidden')
     errorElement.innerHTML = text
     setTimeout(() => errorElement.classList.add('hidden'), 3000)
 }
 
+// validate name
+
 function takeQuiz() {
     const name = document.getElementById('name')
 
     if (!name.value) {
-        onError("Please provide your name")
+        name.classList.add('border-danger');
+        onError("Please provide your name");
+
+        setTimeout(() => name.classList.remove('border-danger'), 3000)
+       
         return;
     }
 
