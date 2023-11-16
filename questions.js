@@ -11,10 +11,10 @@ questions = [
     {
         question: "What does “www” stand for in a website browser?",
         options: [
-            { id: 'o1', option: '3', isCorrect: false },
+            { id: 'o1', option: 'CAPTCHA', isCorrect: false },
             { id: 'o2', option: 'World Wide Web', isCorrect: true },
-            { id: 'o3', option: '5', isCorrect: false },
-            { id: 'o4', option: '44', isCorrect: false },
+            { id: 'o3', option: 'World Wide Win', isCorrect: false },
+            { id: 'o4', option: 'World Wide Webbinar', isCorrect: false },
         ]
     },
     {
@@ -29,45 +29,45 @@ questions = [
     {
         question: "What geometric shape is generally used for stop signs?",
         options: [
-            { id: 'o1', option: '7', isCorrect: false },
-            { id: 'o2', option: '37', isCorrect: false },
+            { id: 'o1', option: 'Trapezium', isCorrect: false },
+            { id: 'o2', option: 'Pentagon', isCorrect: false },
             { id: 'o3', option: 'Octagon', isCorrect: true },
-            { id: 'o4', option: '27', isCorrect: false },
+            { id: 'o4', option: 'Hexagon', isCorrect: false },
         ]
     },
     {
         question: "Which animal can be seen on the Porsche logo?",
         options: [
-            { id: 'o1', option: '7', isCorrect: false },
-            { id: 'o2', option: '37', isCorrect: false },
+            { id: 'o1', option: 'Cat', isCorrect: false },
+            { id: 'o2', option: 'Bull', isCorrect: false },
             { id: 'o3', option: 'Horse', isCorrect: true },
-            { id: 'o4', option: '27', isCorrect: false },
+            { id: 'o4', option: 'Dog', isCorrect: false },
         ]
     },
     {
         question: "What is the name of the World's largest ocean?",
         options: [
-            { id: 'o1', option: '7', isCorrect: false },
-            { id: 'o2', option: '37', isCorrect: false },
+            { id: 'o1', option: 'Arctic Ocean', isCorrect: false },
+            { id: 'o2', option: 'Atlantic Ocean', isCorrect: false },
             { id: 'o3', option: 'Pacific Ocean', isCorrect: true },
-            { id: 'o4', option: '27', isCorrect: false },
+            { id: 'o4', option: 'Indian Ocean', isCorrect: false },
         ]
     },
     {
         question: "What was the first soft drink in space?",
         options: [
-            { id: 'o1', option: '7', isCorrect: false },
+            { id: 'o1', option: 'Soda', isCorrect: false },
             { id: 'o2', option: 'Coca Cola', isCorrect: true },
-            { id: 'o3', option: '17', isCorrect: false },
-            { id: 'o4', option: '27', isCorrect: false },
+            { id: 'o3', option: 'Pepsi', isCorrect: false },
+            { id: 'o4', option: 'Root beer.', isCorrect: false },
         ]
     },  {
         question: "What is the most consumed manufactured drink in the world?",
         options: [
-            { id: 'o1', option: '7', isCorrect: false },
-            { id: 'o2', option: '37', isCorrect: false },
+            { id: 'o1', option: 'Coffee', isCorrect: false },
+            { id: 'o2', option: 'bottled water', isCorrect: false },
             { id: 'o3', option: 'Tea', isCorrect: true },
-            { id: 'o4', option: '27', isCorrect: false },
+            { id: 'o4', option: 'Beer', isCorrect: false },
         ]
     },  
 ]
