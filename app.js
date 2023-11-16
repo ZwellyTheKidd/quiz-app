@@ -69,14 +69,15 @@ function takeQuiz() {
     if (!name.value) {
         name.classList.add('border-danger');
         onError("Please provide your name");
-
         setTimeout(() => name.classList.remove('border-danger'), 3000)
-       
         return;
     }
-    name.value.toUpperCase()
+    
+
+    saveUser()
 
     showQuiz()
+    
 
     getQuestionAndOptions(currentQuestionIndex)
 
@@ -126,6 +127,20 @@ function onNextQuestion(index) {
 
 }
 
+
+
+// add record
+function saveUser() {
+
+    var uID = Date.now();
+    const name = document.getElementById('name')
+    let user=name.value.toUpperCase()
+    
+    userState.name=user;
+    userState.id=uID;
+    userState.lastAnswered; 0,
+    userState.score= 0;
+}
 
 
 
