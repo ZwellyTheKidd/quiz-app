@@ -35,4 +35,13 @@ questions = [
             { id: 'o4', option: '27', isCorrect: false },
         ]
     },
+    {
+        question: "16 + 9",
+        options: [
+            { id: 'o1', option: '7', isCorrect: false },
+            { id: 'o2', option: '37', isCorrect: false },
+            { id: 'o3', option: '28', isCorrect: true },
+            { id: 'o4', option: '27', isCorrect: false },
+        ]
+    },
 ]
