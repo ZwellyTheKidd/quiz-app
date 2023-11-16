@@ -21,19 +21,16 @@ let userState = {
     score: 0
 }
 
-
-
 // init score state
 let scoreState = [
-    { id: '', name: '', aswered: 0,score: 0 }
 ]
-
 
 // check answer
 function qtnAnswered(x) {
-    if (x) {
-        userState.score += 1;
-    }
+
+        if (x) {
+            userState.score += 1;
+        }
 }
 
 
@@ -103,7 +100,13 @@ function numberQuestion(questionIndex) {
 
     qtnNum.innerHTML = `Question ${x}/${questions.length}`;
 
-    userState.lastAnswered = questionIndex;
+    if (currentQuestionIndex < questions.length - 1){
+        userState.lastAnswered = questionIndex;
+    }else{
+        userState.lastAnswered = questions.length;
+    }
+
+   
 }
 
 // display question
@@ -152,13 +155,8 @@ function onNextQuestion(index) {
 }
 
 // restart user state
-function restartUser() {
-    userState = {
-        id: '',
-        name: '',
-        lastAnswered: 0,
-        score: 0
-    }
+function reloadPage() {
+    window.location.reload();
 }
 
 // add record
@@ -179,7 +177,7 @@ function saveUser() {
 function saveToArray() {
 
     scoreState.push(userState)
-    saveUserState()
+    saveScoreState()
 
 }
 
@@ -227,3 +225,6 @@ document.addEventListener('DOMContentLoaded', function () {
     showIntro()
     getScoreState()
 }, false);
+
+
+// localStorage.clear();
