@@ -21,10 +21,21 @@ let userState = {
     score: 0
 }
 
+let peopleArray =[];
+
 // init score state
 let scoreState = [
     { id: '', name: '', score: 0, aswered: 0 }
 ]
+
+
+// check answer
+function qtnAnswered(x) {
+    if (x) {
+        userState.score+=1;
+    } 
+}
+
 
 
 // hide zonke
@@ -44,6 +55,7 @@ function showIntro() {
 
 // show intro element
 function showScores() {
+    saveToArray()
     hideDivs()
     scoresElement.classList.remove('hidden')
 }
@@ -83,20 +95,32 @@ function takeQuiz() {
 
 }
 
+// display question of total questions
+function numberQuestion(questionIndex) {
+
+    let qtnNum=document.getElementById('questionOf');
+    let x =questionIndex+1;
+
+        qtnNum.innerHTML = `Question ${x}/${questions.length}`;
+
+        userState.lastAnswered=questionIndex;
+}
 
 // display question
 function getQuestionAndOptions(i) {
     questionElement.innerHTML = questions[i].question
 
     answersElement.innerHTML = "";
+     numberQuestion(i);
 
     for (let w = 0; w < questions[i].options.length; w++) {
 
         let option = questions[i].options[w]
 
+
         answersElement.innerHTML += `
-        <div class="option">
-        <label for="${option.id}">
+        <div class="option" onClick="qtnAnswered(${option.isCorrect})">
+        <label for="${option.id}" >
             <input type="radio" id="${option.id}" name="answer" onChange="onNextQuestion(${w})"> <span>${option.option}</span>
         </label>
         </div>
@@ -117,9 +141,10 @@ function onNextQuestion(index) {
         setTimeout(() => {
 
             getQuestionAndOptions(currentQuestionIndex)
-        }, 2000)
+        }, 1000)
     } else {
 
+        saveUserState() 
         setTimeout(() =>  showScores(), 2000)
        
     }
@@ -127,7 +152,7 @@ function onNextQuestion(index) {
 
 }
 
-
+// 
 
 // add record
 function saveUser() {
@@ -138,15 +163,23 @@ function saveUser() {
     
     userState.name=user;
     userState.id=uID;
-    userState.lastAnswered; 0,
+    userState.lastAnswered= 0,
     userState.score= 0;
 }
 
 
+// save data to storage
+function saveToArray() {
+
+    peopleArray.push(userState)
+    saveUserState()
+
+}
+
 
 // save data to storage
 function saveUserState() {
-    localStorage.setItem('userState', JSON.stringify(userState));
+    localStorage.setItem('peopleArray', JSON.stringify(userState));
 }
 
 function saveScoreState() {
@@ -155,8 +188,8 @@ function saveScoreState() {
 
 // read data from storage
 function getUserState() {
-    if (localStorage.getItem('userState')) {
-        userState = JSON.parse(localStorage.getItem('userState'));
+    if (localStorage.getItem('peopleArray')) {
+        peopleArray = JSON.parse(localStorage.getItem('peopleArray'));
     }
 }
 
@@ -171,6 +204,8 @@ function getScoreState() {
 // render
 function render() {
 
+
+
 }
 
 render()
@@ -183,6 +218,5 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // show the intro
     showIntro()
-
-    getQuestionAndOptions(currentQuestionIndex)
+    getScoreState()
 }, false);
