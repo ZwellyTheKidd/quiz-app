@@ -27,6 +27,7 @@ let scoreState = [
 
 
 
+
 // check answer
 function indexOf(index, answer) {
 
@@ -40,15 +41,12 @@ function indexOf(index, answer) {
     else{
         console.log("right");
         userState.score+=1;
-        console.log(userState.score);
-
-        if (userState.score=inc) {
-            console.log("wrong");
-
-        }
     }
-
+   
     userState.lastAnswered =index+1;
+    if (userState.score>userState.lastAnswered) {
+        userState.score=userState.lastAnswered;   
+    }
 }
 
 
