@@ -21,19 +21,17 @@ let userState = {
     score: 0
 }
 
-let peopleArray = [];
+
 
 // init score state
 let scoreState = [
-    { id: '', name: '', score: 0, aswered: 0 }
+    { id: '', name: '', aswered: 0,score: 0 }
 ]
 
 
 // check answer
 function qtnAnswered(x) {
-    
     if (x) {
-
         userState.score += 1;
     }
 }
@@ -173,19 +171,14 @@ function saveUser() {
     userState.name = user;
     userState.id = uID;
     userState.lastAnswered = 0,
-        userState.score = 0;
+    userState.score = 0;
 }
 
 
 // save data to storage
 function saveToArray() {
 
-    peopleArray.push({
-        id: userState.id,
-        name: userState.name,
-        lastAnswered: userState.lastAnswered,
-        score: userState.score
-    })
+    scoreState.push(userState)
     saveUserState()
 
 }
@@ -193,7 +186,7 @@ function saveToArray() {
 
 // save data to storage
 function saveUserState() {
-    localStorage.setItem('peopleArray', JSON.stringify(userState));
+    localStorage.setItem('userState', JSON.stringify(userState));
 }
 
 function saveScoreState() {
