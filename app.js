@@ -28,9 +28,15 @@ let scoreState = [
 // check answer
 function qtnAnswered(x) {
 
+    let max=questions.length
+    if (userState.score < max) {
         if (x) {
             userState.score += 1;
         }
+    }else{
+        userState.score = max;
+    }
+   
 }
 
 
@@ -52,7 +58,7 @@ function showIntro() {
 
 // show scores element
 function showScores() {
-    saveToArray()
+    scoreList()
     hideDivs()
     scoresElement.classList.remove('hidden')
 }
@@ -100,13 +106,13 @@ function numberQuestion(questionIndex) {
 
     qtnNum.innerHTML = `Question ${x}/${questions.length}`;
 
-    if (currentQuestionIndex < questions.length - 1){
+    if (currentQuestionIndex < questions.length - 1) {
         userState.lastAnswered = questionIndex;
-    }else{
+    } else {
         userState.lastAnswered = questions.length;
     }
 
-   
+
 }
 
 // display question
@@ -147,6 +153,7 @@ function onNextQuestion(index) {
         }, 1000)
     } else {
 
+        saveToArray();
         setTimeout(() => showScores(), 2000)
 
     }
@@ -169,7 +176,7 @@ function saveUser() {
     userState.name = user;
     userState.id = uID;
     userState.lastAnswered = 0,
-    userState.score = 0;
+        userState.score = 0;
 }
 
 
@@ -204,17 +211,31 @@ function getScoreState() {
     }
 }
 
+//display scores list
+function scoreList() {
 
+    let tbody = document.getElementById('tBody');
+
+    tbody.innerHTML = " ";
+
+    for (let w = 0; w < scoreState.length; w++) {
+
+        tbody.innerHTML += `
+        <tr>
+        <td>${scoreState[w].name}</td>
+        <td>${scoreState[w].lastAnswered}</td>
+        <td>${scoreState[w].score}</td>
+    </tr>
+    `
+    }
+}
 
 // render
 function render() {
 
-
-
 }
 
 render()
-
 
 // run this only oce
 document.addEventListener('DOMContentLoaded', function () {
