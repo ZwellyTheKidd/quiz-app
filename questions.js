@@ -26,4 +26,13 @@ questions = [
             { id: 'o4', option: 'Amazulu', isCorrect: false },
         ]
     },
+    {
+        question: "16 + 1",
+        options: [
+            { id: 'o1', option: '7', isCorrect: false },
+            { id: 'o2', option: '37', isCorrect: false },
+            { id: 'o3', option: '17', isCorrect: true },
+            { id: 'o4', option: '27', isCorrect: false },
+        ]
+    },
 ]

@@ -25,20 +25,31 @@ let userState = {
 let scoreState = [
 ]
 
+
+
 // check answer
-function qtnAnswered(x) {
+function indexOf(index, answer) {
 
-    let max=questions.length
-    if (userState.score < max) {
-        if (x) {
-            userState.score += 1;
-        }
-    }else{
-        userState.score = max;
+    let option = questions[index].options[answer];
+    let x=option.isCorrect;
+    let inc=index+1;
+
+      if (!x){
+        console.log("wrong");
     }
-   
-}
+    else{
+        console.log("right");
+        userState.score+=1;
+        console.log(userState.score);
 
+        if (userState.score!=inc) {
+            console.log("wrong");
+            userState.score-=1
+        }
+    }
+
+    userState.lastAnswered =index+1;
+}
 
 
 // hide all
@@ -77,7 +88,6 @@ function onError(text) {
 }
 
 // validate name
-
 function takeQuiz() {
     const name = document.getElementById('name')
 
@@ -106,13 +116,6 @@ function numberQuestion(questionIndex) {
 
     qtnNum.innerHTML = `Question ${x}/${questions.length}`;
 
-    if (currentQuestionIndex < questions.length - 1) {
-        userState.lastAnswered = questionIndex;
-    } else {
-        userState.lastAnswered = questions.length;
-    }
-
-
 }
 
 // display question
@@ -125,11 +128,13 @@ function getQuestionAndOptions(i) {
     for (let w = 0; w < questions[i].options.length; w++) {
 
         let option = questions[i].options[w]
+        let qIndex=i;
+        let oIndex=w;
 
 
         answersElement.innerHTML += `
-        <div class="option" onClick="qtnAnswered(${option.isCorrect})">
-        <label for="${option.id}" >
+        <div class="option" >
+        <label for="${option.id}" onClick="indexOf(${qIndex}, ${oIndex})">
             <input type="radio" id="${option.id}" name="answer" onChange="onNextQuestion(${w})"> <span>${option.option}</span>
         </label>
         </div>
