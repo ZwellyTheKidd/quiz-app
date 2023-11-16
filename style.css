@@ -12,6 +12,7 @@
     background-position: center;
     position: relative;
     overflow-y: scroll;
+    
 }
 
 .box {
@@ -19,6 +20,7 @@
     padding: 1rem;
     border-radius: 1rem;
     background-color: whitesmoke;
+
 }
 
 

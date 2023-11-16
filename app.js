@@ -42,9 +42,9 @@ function indexOf(index, answer) {
         userState.score+=1;
         console.log(userState.score);
 
-        if (userState.score!=inc) {
+        if (userState.score=inc) {
             console.log("wrong");
-            userState.score-=1
+
         }
     }
 
@@ -98,14 +98,9 @@ function takeQuiz() {
         return;
     }
 
-
     saveUser()
-
     showQuiz()
-
-
     getQuestionAndOptions(currentQuestionIndex)
-
 }
 
 // display question of total questions
@@ -240,7 +235,6 @@ function render() {
 
 }
 
-render()
 
 // run this only oce
 document.addEventListener('DOMContentLoaded', function () {
@@ -251,6 +245,20 @@ document.addEventListener('DOMContentLoaded', function () {
     showIntro()
     getScoreState()
 }, false);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // localStorage.clear();
