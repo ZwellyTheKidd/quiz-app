@@ -21,6 +21,7 @@
 }
 
 
+
 .hidden {
     display: none;
 }
@@ -52,9 +53,11 @@
 }
 
 .question {
-    font-weight: 100;
+    font-weight: 200;
     font-size: 1.8rem;
     margin-bottom: .5rem;
+    display: flex;
+    justify-content: center;
 }
 .answers{
     display: flex;
