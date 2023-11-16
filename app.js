@@ -26,7 +26,7 @@ let scoreState = [
 ]
 
 
-
+let scrArr=[];
 
 // check answer
 function indexOf(index, answer) {
@@ -40,7 +40,7 @@ function indexOf(index, answer) {
     }
     else{
         console.log("right");
-        userState.score+=1;
+        scrArr[index]=index;
     }
    
     userState.lastAnswered =index+1;
@@ -180,7 +180,7 @@ function saveUser() {
 
 // save data to storage
 function saveToArray() {
-
+    userState.score = scrArr.length;
     scoreState.push(userState)
     saveScoreState()
 
