@@ -21,7 +21,7 @@ let userState = {
     score: 0
 }
 
-let peopleArray =[];
+let peopleArray = [];
 
 // init score state
 let scoreState = [
@@ -31,14 +31,16 @@ let scoreState = [
 
 // check answer
 function qtnAnswered(x) {
+    
     if (x) {
-        userState.score+=1;
-    } 
+
+        userState.score += 1;
+    }
 }
 
 
 
-// hide zonke
+// hide all
 function hideDivs() {
     scoresElement.classList.add('hidden')
     introElment.classList.add('hidden')
@@ -53,7 +55,7 @@ function showIntro() {
 }
 
 
-// show intro element
+// show scores element
 function showScores() {
     saveToArray()
     hideDivs()
@@ -84,12 +86,12 @@ function takeQuiz() {
         setTimeout(() => name.classList.remove('border-danger'), 3000)
         return;
     }
-    
+
 
     saveUser()
 
     showQuiz()
-    
+
 
     getQuestionAndOptions(currentQuestionIndex)
 
@@ -98,12 +100,12 @@ function takeQuiz() {
 // display question of total questions
 function numberQuestion(questionIndex) {
 
-    let qtnNum=document.getElementById('questionOf');
-    let x =questionIndex+1;
+    let qtnNum = document.getElementById('questionOf');
+    let x = questionIndex + 1;
 
-        qtnNum.innerHTML = `Question ${x}/${questions.length}`;
+    qtnNum.innerHTML = `Question ${x}/${questions.length}`;
 
-        userState.lastAnswered=questionIndex;
+    userState.lastAnswered = questionIndex;
 }
 
 // display question
@@ -111,7 +113,7 @@ function getQuestionAndOptions(i) {
     questionElement.innerHTML = questions[i].question
 
     answersElement.innerHTML = "";
-     numberQuestion(i);
+    numberQuestion(i);
 
     for (let w = 0; w < questions[i].options.length; w++) {
 
@@ -144,34 +146,46 @@ function onNextQuestion(index) {
         }, 1000)
     } else {
 
-        saveUserState() 
-        setTimeout(() =>  showScores(), 2000)
-       
+        setTimeout(() => showScores(), 2000)
+
     }
 
 
 }
 
-// 
+// restart user state
+function restartUser() {
+    userState = {
+        id: '',
+        name: '',
+        lastAnswered: 0,
+        score: 0
+    }
+}
 
 // add record
 function saveUser() {
 
     var uID = Date.now();
     const name = document.getElementById('name')
-    let user=name.value.toUpperCase()
-    
-    userState.name=user;
-    userState.id=uID;
-    userState.lastAnswered= 0,
-    userState.score= 0;
+    let user = name.value.toUpperCase()
+
+    userState.name = user;
+    userState.id = uID;
+    userState.lastAnswered = 0,
+        userState.score = 0;
 }
 
 
 // save data to storage
 function saveToArray() {
 
-    peopleArray.push(userState)
+    peopleArray.push({
+        id: userState.id,
+        name: userState.name,
+        lastAnswered: userState.lastAnswered,
+        score: userState.score
+    })
     saveUserState()
 
 }
