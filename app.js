@@ -83,6 +83,7 @@ function takeQuiz() {
 }
 
 
+// display question
 function getQuestionAndOptions(i) {
     questionElement.innerHTML = questions[i].question
 
@@ -104,6 +105,7 @@ function getQuestionAndOptions(i) {
 }
 
 
+// next quetion 
 function onNextQuestion(index) {
 
     console.log(questions[currentQuestionIndex].options[index]);
