@@ -1,171 +1,113 @@
-// init DOM elements
-const introElment = document.getElementById('intro');
-const scoresElement = document.getElementById('scores');
-const quizElement = document.getElementById('quiz');
-const errorElement = document.getElementById('error');
+var quiz = {
+    // (A) PROPERTIES
+    // (A1) QUESTIONS & ANSWERS
+    // Q = QUESTION, O = OPTIONS, A = CORRECT ANSWER
+    data: [
+    {
+    q: "What is the standard distance between the target and archer in Olympics?",
+    o: ["50 meters", "70 meters", "100 meters", "120 meters"],
+    a: 1, // arrays start with 0, so answer is 70
+    },
+    {
+    q: "Which is the highest number on a standard roulette wheel?",
+    o: ["22", "24", "32", "36"],
+    a: 3,
+    },
+    {
+    q: "How much wood could a woodchuck chuck if a woodchuck would chuck wood?",
+    o: ["400 pounds", "550 pounds", "700 pounds", "750 pounds"],
+    a: 2,
+    },
+    {
+    q: "Which is the seventh planet from the sun?",
+    o: ["Uranus", "Earth", "Pluto", "Mars"],
+    a: 0,
+    },
+    {
+    q: "Which is the largest ocean on Earth?",
+    o: ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
+    a: 3,
+    },
+    ],
 
-// questions sections
-const questionOfElement = document.getElementById('questionOf')
-const questionElement = document.getElementById('question')
-const answersElement = document.getElementById('answers')
+    // (A2) HTML ELEMENTS
 
-
-// current question index
-let currentQuestionIndex = 0;
-
-// init the current user data
-let userState = {
-    id: '',
-    name: '',
-    lastAnswered: 0,
-    score: 0
-}
-
-// init score state
-let scoreState = [
-    { id: '', name: '', score: 0, aswered: 0 }
-]
-
-
-// hide zonke
-function hideDivs() {
-    scoresElement.classList.add('hidden')
-    introElment.classList.add('hidden')
-    quizElement.classList.add('hidden')
-}
-
-// show intro element
-function showIntro() {
-    document.getElementById('name').value = ""
-    hideDivs()
-    introElment.classList.remove('hidden')
-}
-
-
-// show intro element
-function showScores() {
-    hideDivs()
-    scoresElement.classList.remove('hidden')
-}
-
-// show Quiz
-function showQuiz() {
-    hideDivs()
-    quizElement.classList.remove('hidden')
-}
-
-// show error
-function onError(text) {
-    errorElement.classList.remove('hidden')
-    errorElement.innerHTML = text
-    setTimeout(() => errorElement.classList.add('hidden'), 3000)
-}
-
-// validate name
-
-function takeQuiz() {
-    const name = document.getElementById('name')
-
-    if (!name.value) {
-        name.classList.add('border-danger');
-        onError("Please provide your name");
-
-        setTimeout(() => name.classList.remove('border-danger'), 3000)
-       
-        return;
+    hWrap: null, // HTML quiz container
+    hQn: null, // HTML question wrapper
+    hAns: null, // HTML answers wrapper
+    // (A3) GAME FLAGS
+    now: 0, // current question
+    score: 0, // current score
+    // (B) INIT QUIZ HTML
+    init: () => {
+    // (B1) WRAPPER
+    quiz.hWrap = document.getElementById("quizWrap");
+    // (B2) QUESTIONS SECTION
+    quiz.hQn = document.createElement("div");
+    quiz.hQn.id = "quizQn";
+    quiz.hWrap.appendChild(quiz.hQn);
+    // (B3) ANSWERS SECTION
+    quiz.hAns = document.createElement("div");
+    quiz.hAns.id = "quizAns";
+    quiz.hWrap.appendChild(quiz.hAns);
+    // (B4) GO!
+    quiz.draw();
+    },
+    // (C) DRAW QUESTION
+    draw: () => {
+    // (C1) QUESTION
+    quiz.hQn.innerHTML = quiz.data[quiz.now].q;
+    // (C2) OPTIONS
+    quiz.hAns.innerHTML = "";
+    for (let i in quiz.data[quiz.now].o) {
+    let radio = document.createElement("input");
+    radio.type = "radio";
+    radio.name = "quiz";
+    radio.id = "quizo" + i;
+    quiz.hAns.appendChild(radio);
+    let label = document.createElement("label");
+    label.innerHTML = quiz.data[quiz.now].o[i];
+    label.setAttribute("for", "quizo" + i);
+    label.dataset.idx = i;
+    label.addEventListener("click", () => {
+    quiz.select(label); });
+    quiz.hAns.appendChild(label);
     }
-    name.value.toUpperCase()
-
-    showQuiz()
-
-    getQuestionAndOptions(currentQuestionIndex)
-
-}
-
-
-function getQuestionAndOptions(i) {
-    questionElement.innerHTML = questions[i].question
-
-    answersElement.innerHTML = "";
-
-    for (let w = 0; w < questions[i].options.length; w++) {
-
-        let option = questions[i].options[w]
-
-        answersElement.innerHTML += `
-        <div class="option">
-        <label for="${option.id}">
-            <input type="radio" id="${option.id}" name="answer" onChange="onNextQuestion(${w})"> <span>${option.option}</span>
-        </label>
-        </div>
-        `
+    },
+   
+    select: (option) => {
+    // (D1) DETACH ALL ONCLICK
+    let all = quiz.hAns.getElementsByTagName("label");
+    for (let label of all) {
+    label.removeEventListener("click", quiz.select);
     }
-
-}
-
-
-function onNextQuestion(index) {
-
-    console.log(questions[currentQuestionIndex].options[index]);
-
-    if (currentQuestionIndex < questions.length - 1) {
-        currentQuestionIndex = currentQuestionIndex + 1;
-
-        setTimeout(() => {
-
-            getQuestionAndOptions(currentQuestionIndex)
-        }, 2000)
+    // (D2) CHECK IF CORRECT
+    let correct = option.dataset.idx ==
+    quiz.data[quiz.now].a;
+    if (correct) {
+    quiz.score++;
+    option.classList.add("correct");
     } else {
-
-        setTimeout(() =>  showScores(), 2000)
-       
+    option.classList.add("wrong");
     }
-
-
-}
-
-
-
-
-// save data to storage
-function saveUserState() {
-    localStorage.setItem('userState', JSON.stringify(userState));
-}
-
-function saveScoreState() {
-    localStorage.setItem('scoreState', JSON.stringify(scoreState));
-}
-
-// read data from storage
-function getUserState() {
-    if (localStorage.getItem('userState')) {
-        userState = JSON.parse(localStorage.getItem('userState'));
+    // (D3) NEXT QUESTION OR END GAME
+    quiz.now++;
+    setTimeout(() => {
+    if (quiz.now < quiz.data.length) {
+    quiz.draw();
+    } else {
+    quiz.hQn.innerHTML = `You have answered
+    ${quiz.score} of ${quiz.data.length} correctly.`;
+    quiz.hAns.innerHTML = "";
     }
-}
+    }, 1000);
+    },
+    // (E) RESTART QUIZ
+    reset: () => {
+    quiz.now = 0;
+    quiz.score = 0;
+    quiz.draw();
+    },
+    };
 
-function getScoreState() {
-    if (localStorage.getItem('scoreState')) {
-        scoreState = JSON.parse(localStorage.getItem('scoreState'));
-    }
-}
-
-
-
-// render
-function render() {
-
-}
-
-render()
-
-
-// run this only oce
-document.addEventListener('DOMContentLoaded', function () {
-    // hide everything
-    hideDivs()
-
-    // show the intro
-    showIntro()
-
-    getQuestionAndOptions(currentQuestionIndex)
-}, false);
+    window.addEventListener("load", quiz.init);
