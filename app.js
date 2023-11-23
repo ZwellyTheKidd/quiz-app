@@ -1,3 +1,4 @@
+
 var quiz = {
     // (A) PROPERTIES
     // (A1) QUESTIONS & ANSWERS
@@ -88,56 +89,26 @@ var quiz = {
     quiz.score++;
     option.classList.add("correct");
     } else {
-
-        setTimeout(() =>  showScores(), 2000)
-       
+    option.classList.add("wrong");
     }
-
-
-}
-
-
-
-
-// save data to storage
-function saveUserState() {
-    localStorage.setItem('userState', JSON.stringify(userState));
-}
-
-function saveScoreState() {
-    localStorage.setItem('scoreState', JSON.stringify(scoreState));
-}
-
-// read data from storage
-function getUserState() {
-    if (localStorage.getItem('userState')) {
-        userState = JSON.parse(localStorage.getItem('userState'));
+    // (D3) NEXT QUESTION OR END GAME
+    quiz.now++;
+    setTimeout(() => {
+    if (quiz.now < quiz.data.length) {
+    quiz.draw();
+    } else {
+    quiz.hQn.innerHTML = `You have answered
+    ${quiz.score} of ${quiz.data.length} correctly.`;
+    quiz.hAns.innerHTML = "";
     }
-}
+    }, 1000);
+    },
+    // (E) RESTART QUIZ
+    reset: () => {
+    quiz.now = 0;
+    quiz.score = 0;
+    quiz.draw();
+    },
+    };
 
-function getScoreState() {
-    if (localStorage.getItem('scoreState')) {
-        scoreState = JSON.parse(localStorage.getItem('scoreState'));
-    }
-}
-
-
-
-// render
-function render() {
-
-}
-
-render()
-
-
-// run this only oce
-document.addEventListener('DOMContentLoaded', function () {
-    // hide everything
-    hideDivs()
-
-    // show the intro
-    showIntro()
-
-    getQuestionAndOptions(currentQuestionIndex)
-}, false);
+    window.addEventListener("load", quiz.init);
