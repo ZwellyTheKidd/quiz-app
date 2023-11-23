@@ -88,26 +88,56 @@ var quiz = {
     quiz.score++;
     option.classList.add("correct");
     } else {
-    option.classList.add("wrong");
-    }
-    // (D3) NEXT QUESTION OR END GAME
-    quiz.now++;
-    setTimeout(() => {
-    if (quiz.now < quiz.data.length) {
-    quiz.draw();
-    } else {
-    quiz.hQn.innerHTML = `You have answered
-    ${quiz.score} of ${quiz.data.length} correctly.`;
-    quiz.hAns.innerHTML = "";
-    }
-    }, 1000);
-    },
-    // (E) RESTART QUIZ
-    reset: () => {
-    quiz.now = 0;
-    quiz.score = 0;
-    quiz.draw();
-    },
-    };
 
-    window.addEventListener("load", quiz.init);
+        setTimeout(() =>  showScores(), 2000)
+       
+    }
+
+
+}
+
+
+
+
+// save data to storage
+function saveUserState() {
+    localStorage.setItem('userState', JSON.stringify(userState));
+}
+
+function saveScoreState() {
+    localStorage.setItem('scoreState', JSON.stringify(scoreState));
+}
+
+// read data from storage
+function getUserState() {
+    if (localStorage.getItem('userState')) {
+        userState = JSON.parse(localStorage.getItem('userState'));
+    }
+}
+
+function getScoreState() {
+    if (localStorage.getItem('scoreState')) {
+        scoreState = JSON.parse(localStorage.getItem('scoreState'));
+    }
+}
+
+
+
+// render
+function render() {
+
+}
+
+render()
+
+
+// run this only oce
+document.addEventListener('DOMContentLoaded', function () {
+    // hide everything
+    hideDivs()
+
+    // show the intro
+    showIntro()
+
+    getQuestionAndOptions(currentQuestionIndex)
+}, false);
